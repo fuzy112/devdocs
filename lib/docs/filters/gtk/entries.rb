@@ -9,7 +9,7 @@ module Docs
         when 'class'
           "Gtk#{object}"
         when 'struct'
-          if object.starts_with('_')
+          if object.starts_with?('_')
             object.sub('_', '_Gtk')
           else
             "Gtk#{object}"
