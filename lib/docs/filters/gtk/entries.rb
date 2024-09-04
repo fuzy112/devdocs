@@ -2,7 +2,6 @@ module Docs
   class Gtk
     class EntriesFilter < Docs::EntriesFilter
 
-      # TODO: correctly convert snake_case names
       def get_name
         type, object, member = *slug.split('.')
 
@@ -16,13 +15,13 @@ module Docs
             "Gtk#{object}"
           end
         when 'type_func'
-          "gtk_#{object.downcase}_#{member}"
+          "gtk_#{snake_case(object)}_#{member}"
         when 'class_method'
-          "gtk_#{object.downcase}_#{member}"
+          "gtk_#{snake_case(object)}_#{member}"
         when 'ctor'
-          "gtk_#{object.downcase}_#{member}"
+          "gtk_#{snake_case(object)}_#{member}"
         when 'method'
-          "gtk_#{object.downcase}_#{member}"
+          "gtk_#{snake_case(object)}_#{member}"
         when 'property'
           "Gtk.#{object}:#{member}"
         when 'signal'
@@ -54,6 +53,12 @@ module Docs
           node.css('.srclink').remove
           node.content
         end
+      end
+
+      def snake_case(str)
+        return str.downcase if str =~ /^[A-Z_]+$/
+        str.gsub(/\B[A-Z]/, '_\&').squeeze("_") =~ /_*(.*)/
+        $+.downcase
       end
 
       def get_type
