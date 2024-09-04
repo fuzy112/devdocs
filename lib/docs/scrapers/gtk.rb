@@ -61,6 +61,9 @@ module Docs
       platform-support.html
       api-index-full.html
       annotation-glossary.html
+
+      gtk4-update-icon-cache.html
+
     )
 
     GTK4_SKIP_PATTERNS = [
@@ -72,40 +75,22 @@ module Docs
       Licensed under the GNU Lesser General Public License version 2.1 or later.
     HTML
 
+    version '3.0' do
+      self.release = '3.24'
+      self.base_url = 'https://docs.gtk.org/gtk3/'
+
+      options[:root_title] = 'GTK+3 Reference Manual'
+      options[:skip] = GTK3_SKIP
+      options[:skip_patterns] = GTK3_SKIP_PATTERNS
+    end
+
     version '4.0' do
-      self.release = '4.0.0'
-      self.base_url = "https://developer-old.gnome.org/gtk4/#{self.version}/"
+      self.release = '4.15.7'
+      self.base_url = 'https://docs.gtk.org/gtk4/'
 
       options[:root_title] = 'GTK 4 Reference Manual'
       options[:skip] = GTK4_SKIP
       options[:skip_patterns] = GTK4_SKIP_PATTERNS
-    end
-
-    version '3.24' do
-      self.release = '3.24.24'
-      self.base_url = "https://developer.gnome.org/gtk3/#{self.version}/"
-
-      options[:root_title] = 'GTK+ 3 Reference Manual'
-      options[:skip] = GTK3_SKIP
-      options[:skip_patterns] = GTK3_SKIP_PATTERNS
-    end
-
-    version '3.22' do
-      self.release = '3.22.3'
-      self.base_url = "https://developer.gnome.org/gtk3/#{self.version}/"
-
-      options[:root_title] = 'GTK+ 3 Reference Manual'
-      options[:skip] = GTK3_SKIP
-      options[:skip_patterns] = GTK3_SKIP_PATTERNS
-    end
-
-    version '3.20' do
-      self.release = '3.20.4'
-      self.base_url = "https://developer.gnome.org/gtk3/#{self.version}/"
-
-      options[:root_title] = 'GTK+ 3 Reference Manual'
-      options[:skip] = GTK3_SKIP
-      options[:skip_patterns] = GTK3_SKIP_PATTERNS
     end
 
     def get_latest_version(opts)
