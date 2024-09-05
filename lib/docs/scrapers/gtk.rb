@@ -9,6 +9,7 @@ module Docs
       code: 'https://gitlab.gnome.org/GNOME/gtk/'
     }
 
+    html_filters.insert 0, 'gtk/title'
     html_filters.push 'gtk/entries', 'gtk/clean_html', 'title'
 
     options[:container] = '.content'
@@ -53,10 +54,6 @@ module Docs
       options[:skip] = GTK4_SKIP
       options[:skip_patterns] = GTK4_SKIP_PATTERNS
     end
-
-    options[:func_prefix] = 'gtk_'
-    options[:type_prefix] = 'Gtk'
-    options[:macro_prefix] = 'GTK_'
 
     def get_latest_version(opts)
       tags = get_gitlab_tags('gitlab.gnome.org', 'GNOME', 'gtk', opts)

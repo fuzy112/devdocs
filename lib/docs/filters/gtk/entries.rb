@@ -3,69 +3,7 @@ module Docs
     class EntriesFilter < Docs::EntriesFilter
 
       def get_name
-
-        macro_prefix = context[:macro_prefix]
-        func_prefix = context[:func_prefix]
-        type_prefix = context[:type_prefix]
-
-        type, object, member = *slug.split('.')
-
-        case type
-        when 'class'
-          "#{type_prefix}#{object}"
-        when 'struct'
-          if object.starts_with?('_')
-            object.sub('_', "_#{type_prefix}")
-          else
-            "#{type_prefix}#{object}"
-          end
-        when 'union'
-          "#{type_prefix}#{object}"
-        when 'type_func'
-          "#{func_prefix}#{snake_case(object)}_#{member}"
-        when 'class_method'
-          "#{func_prefix}#{snake_case(object)}_#{member}"
-        when 'ctor'
-          "#{func_prefix}#{snake_case(object)}_#{member}"
-        when 'method'
-          "#{func_prefix}#{snake_case(object)}_#{member}"
-        when 'property'
-          "#{type_prefix}.#{object}:#{member}"
-        when 'signal'
-          "#{type_prefix}.#{object}::#{member}"
-        when 'func'
-          if object =~ /^[A-Z_]+$/
-            "#{macro_prefix}#{object}"
-          else
-            "#{func_prefix}#{object}"
-          end
-        when 'vfunc'
-          "#{type_prefix}.#{object}.#{member}"
-        when 'enum'
-          "#{type_prefix}#{object}"
-        when 'flags'
-          "#{type_prefix}#{object}"
-        when 'const'
-          "#{macro_prefix}#{object.upcase}"
-        when 'iface'
-          "#{type_prefix}#{object}"
-        when 'alias'
-          "#{type_prefix}#{object}"
-        when 'callback'
-          "#{type_prefix}#{object}"
-        when 'error'
-          "#{type_prefix}.#{object}"
-        else
-          node = at_css('h4')
-          node.css('.srclink').remove
-          node.content
-        end
-      end
-
-      def snake_case(str)
-        return str.downcase if str =~ /^[A-Z_]+$/
-        str.gsub(/\B[A-Z]/, '_\&').squeeze("_") =~ /_*(.*)/
-        $+.downcase
+        result[:title]
       end
 
       def get_type

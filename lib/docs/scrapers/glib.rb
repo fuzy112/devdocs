@@ -13,13 +13,9 @@ module Docs
     self.base_url = 'https://docs.gtk.org/glib/'
 
     options[:attribution] = <<-HTML
-      &copy; 1997&ndash;2024 GLib Development Team
+      &copy; 1997&ndash;2024 GLib Development Team<br/>
       Licensed under the GNU Lesser General Public License version 2.1 or later.
     HTML
-
-    options[:func_prefix] = 'g_'
-    options[:type_prefix] = 'G'
-    options[:macro_prefix] = 'G_'
 
     options[:root_title] = 'GLib API Reference'
 
