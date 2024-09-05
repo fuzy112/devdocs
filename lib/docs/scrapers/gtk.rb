@@ -14,23 +14,9 @@ module Docs
 
     options[:container] = '.content'
 
-    # These are all "index"-ish pages with no valuable content
-    GTK3_SKIP = %w(
-
+    options[:skip] = %w(
+       class_hierarchy.html
     )
-
-    GTK3_SKIP_PATTERNS = [
-
-    ]
-
-    # These are all "index"-ish pages with no valuable content
-    GTK4_SKIP = %w(
-
-    )
-
-    GTK4_SKIP_PATTERNS = [
-
-    ]
 
     options[:attribution] = <<-HTML
       &copy; 2005&ndash;2020 The GNOME Project<br>
@@ -42,8 +28,6 @@ module Docs
       self.base_url = 'https://docs.gtk.org/gtk3/'
 
       options[:root_title] = 'GTK+3 Reference Manual'
-      options[:skip] = GTK3_SKIP
-      options[:skip_patterns] = GTK3_SKIP_PATTERNS
     end
 
     version '4.0' do
@@ -51,8 +35,6 @@ module Docs
       self.base_url = 'https://docs.gtk.org/gtk4/'
 
       options[:root_title] = 'GTK 4 Reference Manual'
-      options[:skip] = GTK4_SKIP
-      options[:skip_patterns] = GTK4_SKIP_PATTERNS
     end
 
     def get_latest_version(opts)
