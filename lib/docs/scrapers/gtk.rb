@@ -15,59 +15,20 @@ module Docs
 
     # These are all "index"-ish pages with no valuable content
     GTK3_SKIP = %w(
-      gtk.html
-        gtk-resources.html gtk-question-index.html
-      gtkobjects.html
-        Application.html Builder.html WindowWidgets.html LayoutContainers.html
-        DisplayWidgets.html ButtonWidgets.html NumericEntry.html
-        TextWidgetObjects.html TreeWidgetObjects.html MenusAndCombos.html
-        SelectorWidgets.html Ornaments.html ScrollingWidgets.html Printing.html
-        ShortcutsOverview.html MiscObjects.html AbstractObjects.html
-        PlugSocket.html RecentDocuments.html ApplicationChoosing.html
-        Gestures.html DeprecatedObjects.html
-      gtkbase.html
-      theming.html
-      migrating.html
-        ch26s02.html ch28s02.html
-      pt06.html
-      platform-support.html
-      glossary.html
-      annotation-glossary.html
+
     )
 
     GTK3_SKIP_PATTERNS = [
-      /migrating/, /checklist/, /ch30/, /ch32/, /api-index-/
+
     ]
 
     # These are all "index"-ish pages with no valuable content
     GTK4_SKIP = %w(
-      gtk.html
-        gtk-resources.html gtk-question-index.html ch02s02.html
-      concepts.html
-      gtkobjects.html
-        Lists.html Trees.html Application.html Builder.html WindowWidgets.html
-        LayoutContainers.html LayoutManagers.html DisplayWidgets.html
-        MediaSupport.html ButtonWidgets.html NumericEntry.html
-        MenusAndCombos.html SelectorWidgets.html DrawingWidgets.html
-        Ornaments.html ScrollingWidgets.html Printing.html
-        ShortcutsOverview.html MiscObjects.html AbstractObjects.html
-        RecentDocuments.html ApplicationChoosing.html Gestures.html ch36.html
-        ch37.html
-      gtkbase.html
-      theming.html
-      migrating.html
-        ch41s02.html ch41s03.html
-      pt07.html
-      platform-support.html
-      api-index-full.html
-      annotation-glossary.html
-
-      gtk4-update-icon-cache.html
 
     )
 
     GTK4_SKIP_PATTERNS = [
-      /migrating/, /ch03/, /ch09/, /ch10/
+
     ]
 
     options[:attribution] = <<-HTML
@@ -92,6 +53,10 @@ module Docs
       options[:skip] = GTK4_SKIP
       options[:skip_patterns] = GTK4_SKIP_PATTERNS
     end
+
+    options[:func_prefix] = 'gtk_'
+    options[:type_prefix] = 'Gtk'
+    options[:macro_prefix] = 'GTK_'
 
     def get_latest_version(opts)
       tags = get_gitlab_tags('gitlab.gnome.org', 'GNOME', 'gtk', opts)

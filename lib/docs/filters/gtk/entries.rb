@@ -3,51 +3,58 @@ module Docs
     class EntriesFilter < Docs::EntriesFilter
 
       def get_name
+
+        macro_prefix = context[:macro_prefix]
+        func_prefix = context[:func_prefix]
+        type_prefix = context[:type_prefix]
+
         type, object, member = *slug.split('.')
 
         case type
         when 'class'
-          "Gtk#{object}"
+          "#{type_prefix}#{object}"
         when 'struct'
           if object.starts_with?('_')
-            object.sub('_', '_Gtk')
+            object.sub('_', "_#{type_prefix}")
           else
-            "Gtk#{object}"
+            "#{type_prefix}#{object}"
           end
+        when 'union'
+          "#{type_prefix}#{object}"
         when 'type_func'
-          "gtk_#{snake_case(object)}_#{member}"
+          "#{func_prefix}#{snake_case(object)}_#{member}"
         when 'class_method'
-          "gtk_#{snake_case(object)}_#{member}"
+          "#{func_prefix}#{snake_case(object)}_#{member}"
         when 'ctor'
-          "gtk_#{snake_case(object)}_#{member}"
+          "#{func_prefix}#{snake_case(object)}_#{member}"
         when 'method'
-          "gtk_#{snake_case(object)}_#{member}"
+          "#{func_prefix}#{snake_case(object)}_#{member}"
         when 'property'
-          "Gtk.#{object}:#{member}"
+          "#{type_prefix}.#{object}:#{member}"
         when 'signal'
-          "Gtk.#{object}::#{member}"
+          "#{type_prefix}.#{object}::#{member}"
         when 'func'
           if object =~ /^[A-Z_]+$/
-            "GTK_#{object}"
+            "#{macro_prefix}#{object}"
           else
-            "gtk_#{object}"
+            "#{func_prefix}#{object}"
           end
         when 'vfunc'
-          "Gtk.#{object}.#{member}"
+          "#{type_prefix}.#{object}.#{member}"
         when 'enum'
-          "Gtk#{object}"
+          "#{type_prefix}#{object}"
         when 'flags'
-          "Gtk#{object}"
+          "#{type_prefix}#{object}"
         when 'const'
-          "GTK_#{object.upcase}"
+          "#{macro_prefix}#{object.upcase}"
         when 'iface'
-          "Gtk#{object}"
+          "#{type_prefix}#{object}"
         when 'alias'
-          "Gtk#{object}"
+          "#{type_prefix}#{object}"
         when 'callback'
-          "Gtk#{object}"
+          "#{type_prefix}#{object}"
         when 'error'
-          "Gtk.#{object}"
+          "#{type_prefix}.#{object}"
         else
           node = at_css('h4')
           node.css('.srclink').remove
@@ -71,6 +78,8 @@ module Docs
             'Classes'
           when 'struct'
             'Structs'
+          when 'union'
+            'Unions'
           when 'type_func'
             'Functions'
           when 'ctor'
